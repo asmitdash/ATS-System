@@ -41,7 +41,7 @@ I want the response in points having the structure, each section should be a dif
 """
 
 ## streamlit app
-st.set_page_config(page_title="ATS Resume Expert by DASH")
+st.set_page_config(page_title="ATS Resume Expert")
 st.title("Smart ATS")
 st.text("Improve Your Resume ATS")
 jd=st.text_area("Paste the Job Description")
