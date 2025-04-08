@@ -35,9 +35,9 @@ resume:{text}
 description:{jd}
 
 I want the response in points having the structure, each section should be a different paragraph with points
-"Match":"%",
+{{"Match":"%",
 "MissingKeywords:",
-"Profile Summary":""
+"Profile Summary":""}}
 """
 
 ## streamlit app
