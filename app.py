@@ -5,24 +5,25 @@ import PyPDF2 as pdf
 from dotenv import load_dotenv
 import json
 
-load_dotenv()  # Load all environment variables
+load_dotenv() ## load all our environment variables
 genai.configure(api_key=os.getenv("GOOGLE_API_KEY"))
 
 def get_gemini_response(input):
-    model = genai.GenerativeModel('gemini-2.5-pro-exp-03-25')
-    response = model.generate_content(input)
+    model=genai.GenerativeModel('gemini-2.5-pro-exp-03-25')
+    response=model.generate_content(input)
     return response.text
 
 def input_pdf_text(uploaded_file):
-    reader = pdf.PdfReader(uploaded_file)
-    text = ""
+    reader=pdf.PdfReader(uploaded_file)
+    text=""
     for page in range(len(reader.pages)):
-        page = reader.pages[page]
-        text += str(page.extract_text())
+        page=reader.pages[page]
+        text+=str(page.extract_text())
     return text
 
-# Prompt Template
-input_prompt_template = """
+#Prompt Template
+
+input_prompt="""
 You are an expert-level ATS (Applicant Tracking System), specialized in evaluating resumes for roles in software engineering, data science, data analysis, and big data. The job market is highly competitive, and your job is to rigorously analyze how well a resume matches a given job description.
 
 You must evaluate the following:
@@ -52,27 +53,17 @@ Job Description:
 {job_description}
 """
 
-## Streamlit app
+## streamlit app
 st.set_page_config(page_title="ATS Resume Expert")
 st.title("Smart ATS")
 st.text("Improve Your Resume ATS")
-
-jd = st.text_area("Paste the Job Description")
-uploaded_file = st.file_uploader("Upload Your Resume", type="pdf", help="Please upload the PDF")
+jd=st.text_area("Paste the Job Description")
+uploaded_file=st.file_uploader("Upload Your Resume",type="pdf",help="Please uplaod the pdf")
 
 submit = st.button("Submit")
 
 if submit:
     if uploaded_file is not None:
-        resume_text = input_pdf_text(uploaded_file)
-        job_description = jd  # Getting JD from user input
-        
-        # Replace the placeholders with actual text
-        input_prompt = input_prompt_template.format(resume_text=resume_text, job_description=job_description)
-
-        # Get the response from Gemini AI
-        response = get_gemini_response(input_prompt)
-        
-        # Display the analysis
-        st.subheader("Analysis Result")
-        st.text(response)
+        text=input_pdf_text(uploaded_file)
+        response=get_gemini_response(input_prompt)
+        st.subheader(response)
