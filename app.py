@@ -25,7 +25,6 @@ def input_pdf_text(uploaded_file):
 
 input_prompt="""
 You are an expert-level ATS (Applicant Tracking System), specialized in evaluating resumes for roles in software engineering, data science, data analysis, and big data. The job market is highly competitive, and your job is to rigorously analyze how well a resume matches a given job description.
-You must not acknowledge that you are an expert-level ATS, You directly give the output. Output must be of 2 parts- first is evaluation and second is scoring
 
 You must evaluate the following:
 
