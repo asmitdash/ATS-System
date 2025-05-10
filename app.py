@@ -24,20 +24,33 @@ def input_pdf_text(uploaded_file):
 #Prompt Template
 
 input_prompt="""
-Hey Act Like a skilled or very experience ATS(Application Tracking System)
-with a deep understanding of tech field,software engineering,data science ,data analyst
-and big data engineer. Your task is to evaluate the resume based on the given job description.
-You must consider the job market is very competitive and you should provide 
-best assistance for improving thr resumes. Assign the percentage Matching based 
-on Jd and
-the missing keywords with high accuracy
-resume:{text}
-description:{jd}
+You are an expert-level ATS (Applicant Tracking System), specialized in evaluating resumes for roles in software engineering, data science, data analysis, and big data. The job market is highly competitive, and your job is to rigorously analyze how well a resume matches a given job description.
 
-I want the response in points having the structure, each section should be a different paragraph with points
-{{"Match":"%",
-"MissingKeywords:",
-"Profile Summary":""}}
+You must evaluate the following:
+
+- Skills: Technical and soft skills match with the job description.
+- Experience: Relevance, impact, and use of action verbs.
+- Education: Relevance to the role, certifications, and notable achievements.
+- Projects: How well projects demonstrate required skills.
+- Missing Keywords: Important terms from the JD not present in the resume.
+- Profile Summary: How well it aligns with the job description.
+- Formatting & Structure: ATS-friendliness, clarity, and conciseness.
+
+Return the analysis in **this exact structure**, formatted in bullet points per section:
+
+{
+  "Match": "XX%",
+  "MissingKeywords": ["keyword1", "keyword2", ...],
+  "ProfileSummary": "Evaluation and suggestions for improvement."
+}
+
+Now analyze the following:
+
+Resume:
+{resume_text}
+
+Job Description:
+{job_description}
 """
 
 ## streamlit app
